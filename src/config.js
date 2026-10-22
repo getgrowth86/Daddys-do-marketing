@@ -1,6 +1,6 @@
 /* Zentrale Einstellungen. Hier alles anpassen. */
 window.CONFIG = {
-  weekday: 2, hour: 18, minute: 30, seats: 100,
+  weekday: 4, hour: 10, minute: 0, seats: 100,
   bonus: '', podcastUrl: '', tuev: { image: '', caption: 'Nick Geringer ist Business Development Professional mit TÜV Rheinland geprüfter Qualifikation.' }, nickBio: '', results: [],
   /* A/B/C Headline Test. Mission Control (/mission-control) ueberschreibt Aufteilung und Texte nach dem ersten Speichern. *Wort* = gold unterstrichen */
   ab: {
