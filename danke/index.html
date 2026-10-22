@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dein Platz ist gesichert | Daddys Marketing Sprechstunde</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="ty">
+<main class="w" style="padding-top:40px;padding-bottom:40px">
+  <div class="eyebrow" style="padding-top:0"><span class="dot"></span><span>ANMELDUNG ERFOLGREICH</span></div>
+  <h1 id="h">Dein Platz ist gesichert.</h1>
+  <p class="sub c" id="when"></p>
+  <div class="steps" style="margin-top:22px">
+    <div class="step"><b class="n">1</b><div><h3 style="margin-top:0">Trag dir den Termin ein</h3><p>Damit du die Sprechstunde nicht verpasst.</p><a class="btn" id="ics" href="#" style="margin-top:12px">In Kalender eintragen</a></div></div>
+    <div class="step"><b class="n">2</b><div><h3 style="margin-top:0">Prüf dein Postfach</h3><p>Wir schicken dir den Zugang und eine Erinnerung per E-Mail. Schau auch im Spam Ordner nach.</p></div></div>
+    <div class="step"><b class="n">3</b><div><h3 style="margin-top:0">Bring deine Zahlen mit</h3><p>Je konkreter du bist, desto mehr nimmst du mit. Bring dein Angebot, deine Zahlen und deine größte Frage mit.</p></div></div>
+  </div>
+</main>
+<script src="/config.js"></script>
+<script>
+window.addEventListener('load', function () {
+  try { var v = sessionStorage.getItem('vorname'); if (v) document.getElementById('h').textContent = 'Dein Platz ist gesichert, ' + v + '.'; } catch (e) {}
+  var C = window.CONFIG;
+  var days = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  var mo = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  var p = function (x) { return String(x).padStart(2, '0'); };
+  var hh = p(C.hour) + ':' + p(C.minute);
+  // Naechster Termin: Wochentag C.weekday, Uhrzeit C.hour:C.minute (Berlin-Zeit wie auf der Startseite)
+  var now = new Date();
+  var t = new Date(now);
+  t.setHours(C.hour, C.minute, 0, 0);
+  var add = (C.weekday - now.getDay() + 7) % 7;
+  t.setDate(now.getDate() + add);
+  if (t <= now) t.setDate(t.getDate() + 7);
+  document.getElementById('when').textContent = days[t.getDay()] + ', ' + t.getDate() + '. ' + mo[t.getMonth()] + ' · ' + hh + ' Uhr';
+  var s = t.getFullYear() + p(t.getMonth() + 1) + p(t.getDate()) + 'T' + p(C.hour) + p(C.minute) + '00';
+  var e = new Date(t.getTime() + 60 * 60000);
+  var en = e.getFullYear() + p(e.getMonth() + 1) + p(e.getDate()) + 'T' + p(e.getHours()) + p(e.getMinutes()) + '00';
+  var ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Get Growth//Sprechstunde//DE','BEGIN:VEVENT','UID:' + s + '@sprechstunde','DTSTAMP:' + s + 'Z','DTSTART;TZID=Europe/Berlin:' + s,'DTEND;TZID=Europe/Berlin:' + en,"SUMMARY:Daddys Marketing Sprechstunde (live)",'DESCRIPTION:Live Sprechstunde mit Manuel und Nick. Den Zugang bekommst du per E-Mail.','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  var a = document.getElementById('ics');
+  a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+  a.download = 'sprechstunde.ics';
+});
+</script>
+</body>
+</html>
