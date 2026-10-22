@@ -6,7 +6,7 @@ window.CONFIG = {
   ab: {
     weights: { A: 34, B: 33, C: 33 },
     headlines: {
-      A: 'Die Sprechstunde für dein Wachstum: Zwei Marketer analysieren *live* dein Business und du gehst mit deinem *Wachstumsplan* raus.',
+      A: 'Du spürst, dass da *mehr* geht. Wir sagen dir, wo.',
       B: 'Dein Umsatz stagniert? Wir finden *live* den einen Hebel, der dein Wachstum bremst.',
       C: 'Deine Ads bringen Leads, aber keine Kunden? Wir zerlegen *live*, woran es liegt.'
     }
